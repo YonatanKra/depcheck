@@ -229,14 +229,21 @@ export default [
     expected: {
       dependencies: ['unused-sass-dep'],
       devDependencies: [],
-      missing: {},
+      missing: {
+        '@test-dep/aFile': ['sass2.sass'],
+        '@test-dep/aFile2': ['scss2.scss'],
+        sass: ['scss2.scss'],
+      },
       using: {
-        'sass-dep': ['sass.sass'],
-        'sass-dep2': ['sass.sass'],
+        'sass-dep': ['sass.sass', 'sass2.sass'],
+        'sass-dep2': ['sass.sass', 'sass2.sass'],
         '@scss-deps/fonts': ['scss.scss'],
         'scss-dep-2': ['scss.scss'],
         'scss-dep-3': ['scss.scss'],
         'scss-dep': ['scss.scss'],
+        '@test-dep/aFile': ['sass2.sass'],
+        '@test-dep/aFile2': ['scss2.scss'],
+        sass: ['scss2.scss'],
       },
     },
     expectedErrorCode: -1,
@@ -591,12 +598,12 @@ export default [
       devDependencies: [],
       missing: {
         'missing-dep': ['index.js'],
-        'missing-ignore-not': ['index.js']
+        'missing-ignore-not': ['index.js'],
       },
       using: {
         'missing-dep': ['index.js'],
         'missing-ignore-dep': ['index.js'],
-        'missing-ignore-not': ['index.js']
+        'missing-ignore-not': ['index.js'],
       },
     },
     expectedErrorCode: -1,
@@ -764,13 +771,18 @@ export default [
     expected: {
       dependencies: [],
       devDependencies: [],
-      missing: {},
+      missing: {
+        'another-loader': ['index.js'],
+        'script-loader': ['index.js', 'index.ts'],
+      },
       using: {
+        'another-loader': ['index.js'],
+        'script-loader': ['index.js', 'index.ts'],
         'slick-carousel': ['index.js'],
         'slickity-slick': ['index.ts'],
       },
     },
-    expectedErrorCode: 0,
+    expectedErrorCode: -1,
   },
   {
     name: 'support .depcheckignore',
